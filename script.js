@@ -63,7 +63,7 @@ var numChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 var specChar = ["!", "#", "$", "%", "&", "(", ")", "*", "-", "_"];
 
-// Final empty array for password to be pushed to.
+// Empty array to store user choices within.
 var passArr = [];
 
 //PROMPT for password criteria - length, upper and lower case, numbers, special characters.
@@ -73,49 +73,87 @@ var passArr = [];
 // userInput -> Math.floor to randomize.
 // Display password on page.
 
-function createPassword() {
-  passwordLength = parseInt(
-    prompt(
-      "How many characters would you like your password to be? Please choose between 8 and 128."
-    )
-  );
-  if (!passwordLength) {
-    alert("You must enter a list of characters!");
-    return createPassword();
-  } else {
-    if (passwordLength < 8 || passwordLength > 128) {
-      alert("You must choose between 8 and 128 characters.");
-      return createPassword();
-    }
-  }
-  return;
-}
-
 // Assignment code here
 var generatePassword = function () {
-  createPassword();
-
-  // Confirm which characters are to be used.
-  // Note: passwordLength will be used in for loop when generating the random password.
-  var upperCaseConfirm = window.confirm(
-    "Would you like your password to have upper case letters?"
+  var passwordLength = prompt(
+    "How many characters would you like your password to be? Please choose between 8 and 128."
   );
-  var lowerCaseConfirm = window.confirm(
-    "Would you like your password to have lower case letters?"
-  );
-  var numConfirm = window.confirm(
-    "Would you like your password to have numbers?"
-  );
-  var specConfirm = window.confirm(
-    "Would you like your password to have special characters?"
-  );
-
-  if (!upperCaseConfirm && !lowerCaseConfirm && !numConfirm && !specConfirm) {
-    alert(
-      "Please choose what characters you would like included in your password."
+  if (!passwordLength) {
+    alert("You must enter a number!");
+  } else if (passwordLength < 8 || passwordLength > 128) {
+    alert("Your password must be between 8 and 128 characters");
+    return false;
+  } else {
+    // Confirm which characters are to be used.
+    // Note: passwordLength will be used in for loop when generating the random password.
+    var upperCaseConfirm = window.confirm(
+      "Would you like your password to have upper case letters?"
     );
-    generatePassword();
-  } else if {}
+    var lowerCaseConfirm = window.confirm(
+      "Would you like your password to have lower case letters?"
+    );
+    var numConfirm = window.confirm(
+      "Would you like your password to have numbers?"
+    );
+    var specConfirm = window.confirm(
+      "Would you like your password to have special characters?"
+    );
+
+    if (!upperCaseConfirm && !lowerCaseConfirm && !numConfirm && !specConfirm) {
+      alert(
+        "Please choose what characters you would like included in your password."
+      );
+      generatePassword();
+    } else if (
+      upperCaseConfirm &&
+      lowerCaseConfirm &&
+      numConfirm &&
+      specConfirm
+    ) {
+      passArr = upperCaseConfirm.concat(
+        lowerCaseConfirm,
+        numConfirm,
+        specConfirm
+      );
+    } else if (
+      // 3 options only.
+      upperCaseConfirm &&
+      lowerCaseConfirm &&
+      numConfirm
+    ) {
+      passArr = upperCaseConfirm.concat(lowerCaseConfirm, numConfirm);
+    } else if (upperCaseConfirm && lowerCaseConfirm && specConfirm) {
+      passArr = upperCaseConfirm.concat(lowerCaseConfirm && specConfirm);
+    } else if (lowerCaseConfirm && numConfirm && specConfirm) {
+      passArr = lowerCaseConfirm.concat(numConfirm, specConfirm);
+    }
+
+    // 2 options only.
+    else if (upperCaseConfirm && lowerCaseConfirm) {
+      passArr = upperCaseConfirm.concat(lowerCaseConfirm);
+    } else if (numConfirm && specConfirm) {
+      passArr = numConfirm.concat(specConfirm);
+    } else if (upperCaseConfirm && numConfirm) {
+      passArr = upperCaseConfirm.concat(numConfirm);
+    } else if (upperCaseConfirm && specConfirm) {
+      passArr = upperCaseConfirm.concat(specConfirm);
+    } else if (lowerCase && numConfirm) {
+      passArr = lowerCase.concat(numConfirm);
+    } else if (lowerCaseConfirm && specConfirm) {
+      passArr = lowerCaseConfirm.concat(specConfirm);
+    }
+
+    // 1 option only.
+    else if (upperCaseConfirm) {
+      passArr = upperCaseConfirm;
+    } else if (lowerCaseConfirm) {
+      passArr = lowerCaseConfirm;
+    } else if (numConfirm) {
+      passArr = numConfirm;
+    } else if (specConfirm) {
+      passArr = specConfirm;
+    }
+  }
 };
 
 // Write password to the #password input

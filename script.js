@@ -94,6 +94,28 @@ function createPassword() {
 // Assignment code here
 var generatePassword = function () {
   createPassword();
+
+  // Confirm which characters are to be used.
+  // Note: passwordLength will be used in for loop when generating the random password.
+  var upperCaseConfirm = window.confirm(
+    "Would you like your password to have upper case letters?"
+  );
+  var lowerCaseConfirm = window.confirm(
+    "Would you like your password to have lower case letters?"
+  );
+  var numConfirm = window.confirm(
+    "Would you like your password to have numbers?"
+  );
+  var specConfirm = window.confirm(
+    "Would you like your password to have special characters?"
+  );
+
+  if (!upperCaseConfirm && !lowerCaseConfirm && !numConfirm && !specConfirm) {
+    alert(
+      "Please choose what characters you would like included in your password."
+    );
+    generatePassword();
+  } else if {}
 };
 
 // Write password to the #password input

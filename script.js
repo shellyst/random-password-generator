@@ -65,6 +65,7 @@ var specChar = ["!", "#", "$", "%", "&", "(", ")", "*", "-", "_"];
 
 // Empty array to store user choices within.
 var passArr = [];
+var randomPassword = "";
 
 //PROMPT for password criteria - length, upper and lower case, numbers, special characters.
 // Confirm which characters are to be included.
@@ -110,49 +111,52 @@ var generatePassword = function () {
       numConfirm &&
       specConfirm
     ) {
-      passArr = upperCaseConfirm.concat(
-        lowerCaseConfirm,
-        numConfirm,
-        specConfirm
-      );
+      passArr = upperCase.concat(lowerCase, numChar, specChar);
     } else if (
       // 3 options only.
       upperCaseConfirm &&
       lowerCaseConfirm &&
       numConfirm
     ) {
-      passArr = upperCaseConfirm.concat(lowerCaseConfirm, numConfirm);
+      passArr = upperCase.concat(lowerCase, numChar);
     } else if (upperCaseConfirm && lowerCaseConfirm && specConfirm) {
-      passArr = upperCaseConfirm.concat(lowerCaseConfirm && specConfirm);
+      passArr = upperCase.concat(lowerCase && specChar);
     } else if (lowerCaseConfirm && numConfirm && specConfirm) {
-      passArr = lowerCaseConfirm.concat(numConfirm, specConfirm);
+      passArr = lowerCase.concat(numChar, specChar);
     }
 
     // 2 options only.
     else if (upperCaseConfirm && lowerCaseConfirm) {
-      passArr = upperCaseConfirm.concat(lowerCaseConfirm);
+      passArr = upperCase.concat(lowerCase);
     } else if (numConfirm && specConfirm) {
-      passArr = numConfirm.concat(specConfirm);
+      passArr = numChar.concat(specChar);
     } else if (upperCaseConfirm && numConfirm) {
-      passArr = upperCaseConfirm.concat(numConfirm);
+      passArr = upperCase.concat(numChar);
     } else if (upperCaseConfirm && specConfirm) {
-      passArr = upperCaseConfirm.concat(specConfirm);
+      passArr = upperCase.concat(specChar);
     } else if (lowerCase && numConfirm) {
-      passArr = lowerCase.concat(numConfirm);
+      passArr = lowerCase.concat(numChar);
     } else if (lowerCaseConfirm && specConfirm) {
-      passArr = lowerCaseConfirm.concat(specConfirm);
+      passArr = lowerCase.concat(specChar);
     }
 
     // 1 option only.
     else if (upperCaseConfirm) {
-      passArr = upperCaseConfirm;
+      passArr = upperCase;
     } else if (lowerCaseConfirm) {
-      passArr = lowerCaseConfirm;
+      passArr = lowerCase;
     } else if (numConfirm) {
-      passArr = numConfirm;
+      passArr = numChar;
     } else if (specConfirm) {
-      passArr = specConfirm;
+      passArr = specChar;
     }
+
+    for (var i = 0; i < passwordLength; i++) {
+      randomPassword =
+        randomPassword + passArr[Math.floor(Math.random() * passArr.length)];
+      console.log(randomPassword);
+    }
+    return randomPassword;
   }
 };
 

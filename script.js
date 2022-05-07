@@ -66,20 +66,35 @@ var specChar = ["!", "#", "$", "%", "&", "(", ")", "*", "-", "_"];
 // Final empty array for password to be pushed to.
 var passArr = [];
 
+//PROMPT for password criteria - length, upper and lower case, numbers, special characters.
+// Confirm which characters are to be included.
+// At least one character type needs to be selected.
+// Password generated using answers to prompts.
+// userInput -> Math.floor to randomize.
+// Display password on page.
+
 function createPassword() {
-  passwordLength = prompt(
-    "How many characters would you like your password to be? Please choose between 8 and 128."
+  passwordLength = parseInt(
+    prompt(
+      "How many characters would you like your password to be? Please choose between 8 and 128."
+    )
   );
-  if (passwordLength >= 8 && passwordLength <= 128) {
-    prompt("Your password is " + passwordLength + " characters!");
+  if (!passwordLength) {
+    alert("You must enter a list of characters!");
+    return createPassword();
   } else {
-    prompt("Please choose a length between 8 and 128 characters.");
-    createPassword();
+    if (passwordLength < 8 || passwordLength > 128) {
+      alert("You must choose between 8 and 128 characters.");
+      return createPassword();
+    }
   }
+  return;
 }
 
 // Assignment code here
-var generatePassword = function () {};
+var generatePassword = function () {
+  createPassword();
+};
 
 // Write password to the #password input
 function writePassword() {
